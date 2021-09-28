@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <title>Kurtis Melby</title>
+    <meta content="Kurtis Melby" property="og:title">
+    <meta content="Kurtis Melby" name="twitter:title">
+    <meta content="A Minneapolis born nerd, currently stuck in Brooklyn working as a software developer." property="og:description">
+    <meta content="A Minneapolis born nerd, currently stuck in Brooklyn working as a software developer." name="twitter:description">
+    <meta content="A Minneapolis born nerd, currently stuck in Brooklyn working as a software developer." name="description">
+    <script src="https://kit.fontawesome.com/bf85a2d628.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118773848-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118773848-3');
+    </script>
+    <!-- end gtag -->
+  </head>
+  <body>
+    <main role="main" class="site-color-<%= @color %>">
+      <%= @inner_content %>
+    </main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+/* This file is for your main application css. */
+
+
+/* Tailwind base and components should go first. */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/* Custom components. */
+@import "./components";
+
+/* Tailwind Utilities should go custom components, for specificity. */
+@import "tailwindcss/utilities";
+
+
+/* Custom fonts. */
+@import "./fonts";
+
+@import "animate.css";
