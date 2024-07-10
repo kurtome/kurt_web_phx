@@ -26,7 +26,9 @@ erl_crash.dump
 kurt-*.tar
 
 # Ignore assets that are produced by build tools.
-/priv/static
+/priv/static/assets
+# Ignore asset manifest file
+/priv/static/cache_manifest.json
 
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log

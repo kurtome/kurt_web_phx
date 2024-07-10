@@ -13,8 +13,29 @@
       "_work_history_item",
       "html",
       item: %{
+        name: "Google",
+        duration: "2023 - Present",
+        sections: [
+          %{
+            head: "Server Software Engineer",
+            lines: [
+              ~H"""
+              Engineering on Google Drive.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
         name: "Etsy",
-        duration: "2021 - Present",
+        duration: "2021 - 2023",
         sections: [
           %{
             head: "Staff Software Engineer",
