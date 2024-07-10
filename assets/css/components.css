@@ -1,0 +1,199 @@
+html {
+  @apply bg-white;
+}
+
+body, html {
+  @apply bg-body font-body font-light;
+}
+
+p {
+  a {
+    @apply font-light underline;
+    transition: opacity 300ms ease-in-out;
+    &:hover {
+      transition: opacity 300ms ease-in-out;
+      @apply opacity-75;
+    }
+  }
+}
+
+h2, h3, h4 {
+  a {
+    @apply underline;
+    transition: opacity 300ms ease-in-out;
+    &:hover {
+      transition: opacity 300ms ease-in-out;
+      @apply opacity-75;
+    }
+  }
+}
+
+.menu {
+  @apply flex flex-col justify-between w-full;
+
+  li {
+    position: relative;
+
+    @apply mt-5;
+
+
+    a {
+      @apply block relative px-4 py-1 font-title font-medium lowercase text-sm tracking-wider text-right;
+
+      @apply md:px-8 md:py-2 md:text-xl;
+      z-index: 1;
+
+      &:before {
+        transition: opacity 300ms ease-in-out;
+        content: '→';
+        color: black;
+        margin-right: 0.1em;
+        opacity: 0;
+        z-index: -1;
+        /* background: linear-gradient(180deg, transparent, color-mod(theme('colors.body-contrast') a(100%))); */
+
+        /* @media screen(md) {
+               background: linear-gradient(90deg, transparent, color-mod(theme('colors.body-contrast') a(100%)));
+        }
+*/
+      }
+      &:hover, &.selected {
+        @apply font-bold;
+
+        &:before {
+          opacity: 1;
+          transition: opacity 300ms ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.site-title {
+  @apply font-title font-black tracking-wide text-4xl leading-none mr-4 mt-8;
+
+  @apply md:text-5xl md:mr-8;
+}
+
+.ui-header {
+  @apply font-ui font-semibold text-lg tracking-wide uppercase;
+}
+
+.mirror {
+  transform: scale(-1, 1);
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.fade-in {
+  animation: fadein 2s;
+}
+
+.filter-grayscale {
+  filter: grayscale(100%);
+}
+
+
+.site-color-purple {
+  .bg-site-color {
+    background: theme('colors.purple.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.purple.400');
+    }
+  }
+}
+.site-color-red {
+  .bg-site-color {
+    background: theme('colors.red.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.red.400');
+    }
+  }
+}
+.site-color-green {
+  .bg-site-color {
+    background: theme('colors.green.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.green.400');
+    }
+  }
+}
+.site-color-blue {
+  .bg-site-color {
+    background: theme('colors.blue.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.blue.400');
+    }
+  }
+}
+.site-color-indigo {
+  .bg-site-color {
+    background: theme('colors.indigo.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.indigo.400');
+    }
+  }
+}
+.site-color-teal {
+  .bg-site-color {
+    background: theme('colors.teal.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.teal.400');
+    }
+  }
+}
+.site-color-pink {
+  .bg-site-color {
+    background: theme('colors.pink.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.pink.500');
+    }
+  }
+}
+.site-color-gray {
+  .bg-site-color {
+    background: theme('colors.gray.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.gray.400');
+    }
+  }
+}
+.site-color-yellow {
+  .bg-site-color {
+    background: theme('colors.yellow.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.yellow.400');
+    }
+  }
+}
+.site-color-orange {
+  .bg-site-color {
+    background: theme('colors.orange.200');
+  }
+  .menu li a {
+    &:before {
+      color: theme('colors.orange.400');
+    }
+  }
+}
+

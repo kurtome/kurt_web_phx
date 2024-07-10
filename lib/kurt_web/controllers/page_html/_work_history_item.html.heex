@@ -1,0 +1,15 @@
+<h3 class="uppercase tracking-wide mb-1">
+  <span class=""><%= @item.name %></span>
+  <span class="ml-2 opacity-50"><%= @item.duration %></span>
+</h3>
+<%= for section <- @item.sections do %>
+  <p class="opacity-50">
+    <%= section.head %>
+  </p>
+  <%= for line <- section.lines do %>
+    <p class="mb-4">
+      <%= line %>
+    </p>
+  <% end %>
+<% end %>
+

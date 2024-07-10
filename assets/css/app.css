@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/* Custom components. */
+@import "./components";
+
+@import "tailwindcss/utilities";
+
+/* Custom fonts. */
+@import "./fonts";
+
+@import "../../deps/animate.css/animate.css";
