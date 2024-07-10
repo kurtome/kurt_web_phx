@@ -1,6 +1,6 @@
 This is the repo for the source code for https://kurt.melby.me
 
-# Start up
+## Running locally
 
 To start the server:
 
