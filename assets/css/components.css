@@ -38,7 +38,7 @@ h2, h3, h4 {
 
 
     a {
-      @apply block relative px-4 py-1 font-title font-medium lowercase text-sm tracking-wider text-right;
+      @apply block relative px-4 py-1 font-title font-medium lowercase xs:text-xs sm:text-sm tracking-wider text-right;
 
       @apply md:px-8 md:py-2 md:text-xl;
       z-index: 1;

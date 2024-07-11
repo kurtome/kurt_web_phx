@@ -5,6 +5,7 @@ const plugin = require("tailwindcss/plugin")
 const fs = require("fs")
 const path = require("path")
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
@@ -18,6 +19,10 @@ module.exports = {
       'ui': ['Lato', 'serif'],
       'body': ['Lato', 'sans-serif'],
       'code': ['Lato', 'sans-serif']
+    },
+    screens: {
+      'xs': '475px',
+      ...defaultTheme.screens,
     },
     extend: {
       colors: {
