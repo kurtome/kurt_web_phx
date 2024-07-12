@@ -1,105 +1,120 @@
 <div class="">
   <p class="mb-12">Things I work on things other than work, occasionally.</p>
   <h2 class="mb-8 ui-header">Video Games</h2>
-  <%= Phoenix.Template.render(__MODULE__, "_project_list", "html", projects: [
-    %{
-      name: "dayrise",
-      url: "https://kurtome.itch.io/dayrise",
-      duration: "2017",
-      description:
-      ~H"""
-      Dayrise is a two-player co-op dual-stick survival shooter!
-      "A pitch black night with enemies coming from all around,
-      can you survive until morning?" Dayrise was built with the Unity game
-      framework.
-      """
-    },
-    %{
-      name: "etch",
-      url: "https://play.google.com/store/apps/details?id=kurtome.etch.app",
-      duration: "2014",
-      description:
-      ~H"""
-      Etch is a prototype for a open world graffiti game / AR app. It runs on top of 
-      Google Maps and lets anyone in the world use Google Maps as a shared canvas to draw on.
-      Etch restricts the user to only drawing on the map near their physical location, to encourage
-      them to get out in their neighborhood and interact with the world.
-      The app is an Android app
-      (<a href="https://github.com/kurtome/etch-android" target="_blank">source code</a>)
-      handles the drawing and Google Maps interactions, and the server 
-      (<a href="https://github.com/kurtome/etch-web" target="_blank">source code</a>)
-      handles storing the images in S3 by lat/long.
-      """
-    },
-    %{
-      name: "bricked",
-      url: "http://kurtome.github.io/Bricked/",
-      duration: "2012",
-      description:
-      ~H"""
-      Bricked is an experimental web game where the game is learning to play itself.
-      A "breakout" style paddle controlled by a dumb program which has to learn how to move
-      to keep the ball in the air. This is written in javascript
-      (<a href="https://github.com/kurtome/Bricked" target="_blank">source code</a>)
-      , with a 2D physics engine
-      (<a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D.js</a>) and
-      a neurel network called <a href="https://github.com/harthur/brain" target="_href">brain</a>.
-      The AI is running and learning completely in the user's browser, and it starts from scratch
-      everytime the page is loaded.
-      """
-    },
-    %{
-      name: "tag-jumper",
-      url: "https://github.com/kurtome/tag-jumper",
-      duration: "2012",
-      description:
-      ~H"""
-      TagJumper is a Chrome extension meant to turn web browsing into a Mario platformer game.
-      It turns html elements into platforms dynamically and then the player can jump around
-      the page as if it were a Mario level and click on links to navigate the web.
-      """
-    }
-  ]) %>
-  <h2 class="mt-12 mb-4 ui-header">Other</h2>
-  <%= Phoenix.Template.render(__MODULE__, "_project_list", "html", projects: [
-    %{
-      name: "kurt.melby.me",
-      url: "https://github.com/kurtome/kurt_web_phx",
-      duration: "2019",
-      description:
-      ~H"""
-      This website! Written in
-      <a href="https://phoenixframework.org" target="_blank">Elixir/Phoenix</a>
-      and
-      <a href="https://tailwindcss.com" target="_blank">TailwindCSS</a>.
-      """
-    },
-    %{
-      name: "resonator.fm",
-      url: "https://github.com/kurtome/resonator-web",
-      duration: "2018",
-      description:
-      ~H"""
-      Resonator is a defunct project which was meant to be the "GoodReads (or Letterboxd) of podcasts".
-      This is a website I was building after I left my job at Google, and for about a week
-      I thought maybe it was a good idea to try to make launch it by myself, then I came to my sense and
-      got a real job. The backend was written in Scala/Play and the frontend was written in React using
-      <a href="https://github.com/japgolly/scalajs-react" target="_blank">scalajs-react</a> and a custom
-      built ProtoBuf binary API to power the single page app.
-      """
-    },
-    %{
-      name: "python-consul-lock",
-      url: "https://github.com/kurtome/python-consul-lock",
-      duration: "2015",
-      description:
-      ~H"""
-      This is a utility library to simplify the usage of
-      <a href="https://www.consul.io/" target="_blank">HashiCorp's Consul</a>
-      to synchronize distrubuted (multi-server) locks. Written in Python 2.x and
-      distrubuted with <span class="font-code">pip</span>.
-      """
-    }
-  ]) %>
-</div>
+  <%= Phoenix.Template.render(__MODULE__, "_project_list", "html",
+    projects: [
+      %{
+        name: "leap",
+        url: "https://github.com/kurtome/leap",
+        duration: "2023",
+        description: ~H"""
+        Leap is an opinionated toolkit for creating 2D platformers on top of the
+        <a href="https://flame-engine.org/" target="_blank">Flame engine</a>.
+        """
+      },
+      %{
+        name: "coin leap",
+        url: "https://kurtome.itch.io/coin-leap-flame-game-jam-2023",
+        duration: "2023",
+        description: ~H"""
+        <p>Coin Leap is a 2D platformer,
+        explore the path up the mountain or down into the cave.
+        Follow the signs left behind by a mysterious traveler.</p>
 
+        <p>Submission for Flame Jam 3, created by Kurt Melby and Bijan Stephen</p>
+        """
+      },
+      %{
+        name: "dayrise",
+        url: "https://kurtome.itch.io/dayrise",
+        duration: "2017",
+        description: ~H"""
+        Dayrise is a two-player co-op dual-stick survival shooter!
+        "A pitch black night with enemies coming from all around,
+        can you survive until morning?" Dayrise was built with the Unity game
+        framework.
+        """
+      },
+      %{
+        name: "etch",
+        url: "https://play.google.com/store/apps/details?id=kurtome.etch.app",
+        duration: "2014",
+        description: ~H"""
+        Etch is a prototype for a open world graffiti game / AR app. It runs on top of
+        Google Maps and lets anyone in the world use Google Maps as a shared canvas to draw on.
+        Etch restricts the user to only drawing on the map near their physical location, to encourage
+        them to get out in their neighborhood and interact with the world.
+        The app is an Android app
+        (<a href="https://github.com/kurtome/etch-android" target="_blank">source code</a>)
+        handles the drawing and Google Maps interactions, and the server
+        (<a href="https://github.com/kurtome/etch-web" target="_blank">source code</a>)
+        handles storing the images in S3 by lat/long.
+        """
+      },
+      %{
+        name: "bricked",
+        url: "http://kurtome.github.io/Bricked/",
+        duration: "2012",
+        description: ~H"""
+        Bricked is an experimental web game where the game is learning to play itself.
+        A "breakout" style paddle controlled by a dumb program which has to learn how to move
+        to keep the ball in the air. This is written in javascript
+        (<a href="https://github.com/kurtome/Bricked" target="_blank">source code</a>)
+        , with a 2D physics engine
+        (<a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D.js</a>) and
+        a neurel network called <a href="https://github.com/harthur/brain" target="_href">brain</a>.
+        The AI is running and learning completely in the user's browser, and it starts from scratch
+        everytime the page is loaded.
+        """
+      },
+      %{
+        name: "tag-jumper",
+        url: "https://github.com/kurtome/tag-jumper",
+        duration: "2012",
+        description: ~H"""
+        TagJumper is a Chrome extension meant to turn web browsing into a Mario platformer game.
+        It turns html elements into platforms dynamically and then the player can jump around
+        the page as if it were a Mario level and click on links to navigate the web.
+        """
+      }
+    ]
+  ) %>
+  <h2 class="mt-12 mb-4 ui-header">Other</h2>
+  <%= Phoenix.Template.render(__MODULE__, "_project_list", "html",
+    projects: [
+      %{
+        name: "kurt.melby.me",
+        url: "https://github.com/kurtome/kurt_web_phx",
+        duration: "2019",
+        description: ~H"""
+        This website! Written in
+        <a href="https://phoenixframework.org" target="_blank">Elixir/Phoenix</a> and
+        <a href="https://tailwindcss.com" target="_blank">TailwindCSS</a>.
+        """
+      },
+      %{
+        name: "resonator.fm",
+        url: "https://github.com/kurtome/resonator-web",
+        duration: "2018",
+        description: ~H"""
+        Resonator is a defunct project which was meant to be the "GoodReads (or Letterboxd) of podcasts".
+        This is a website I was building after I left my job at Google, and for about a week
+        I thought maybe it was a good idea to try to make launch it by myself, then I came to my sense and
+        got a real job. The backend was written in Scala/Play and the frontend was written in React using
+        <a href="https://github.com/japgolly/scalajs-react" target="_blank">scalajs-react</a> and a custom
+        built ProtoBuf binary API to power the single page app.
+        """
+      },
+      %{
+        name: "python-consul-lock",
+        url: "https://github.com/kurtome/python-consul-lock",
+        duration: "2015",
+        description: ~H"""
+        This is a utility library to simplify the usage of
+        <a href="https://www.consul.io/" target="_blank">HashiCorp's Consul</a> to synchronize distrubuted (multi-server) locks. Written in Python 2.x and
+        distrubuted with <span class="font-code">pip</span>.
+        """
+      }
+    ]
+  ) %>
+</div>
