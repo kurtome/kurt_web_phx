@@ -2,28 +2,32 @@ html {
   @apply bg-white;
 }
 
-body, html {
+body,
+html {
   @apply bg-body font-body font-light;
 }
 
 p {
   a {
-    @apply font-light underline;
+    font-weight: theme(fontWeight.light);
+    text-decoration: underline;
     transition: opacity 300ms ease-in-out;
     &:hover {
       transition: opacity 300ms ease-in-out;
-      @apply opacity-75;
+      opacity: 0.75;
     }
   }
 }
 
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   a {
-    @apply underline;
+    text-decoration: underline;
     transition: opacity 300ms ease-in-out;
     &:hover {
       transition: opacity 300ms ease-in-out;
-      @apply opacity-75;
+      opacity: 0.75;
     }
   }
 }
@@ -33,38 +37,63 @@ h2, h3, h4 {
 
   li {
     position: relative;
-
-    @apply mt-5;
-
+    margin-top: theme(spacing.5);
 
     a {
-      @apply block relative px-4 py-1 font-title font-medium lowercase xs:text-xs sm:text-sm tracking-wider text-right;
+      display: block;
+      position: relative;
 
-      @apply md:px-8 md:py-2 md:text-xl;
+      padding-left: theme(spacing.4);
+      padding-right: theme(spacing.4);
+      padding-top: theme(spacing.1);
+      font: theme(fontFamily.title);
+      text-transform: lowercase;
+      initial-letter: theme(letterSpacing.wider);
+      text-align: right;
+
+      @media screen(xs) {
+        font-size: theme(fontSize.xs);
+        line-height: theme(lineHeight.4);
+      }
+
+      @media screen(sm) {
+        font-size: theme(fontSize.sm);
+        line-height: theme(lineHeight.5);
+      }
+
+      @media screen(md) {
+        padding-left: theme(spacing.8);
+        padding-right: theme(spacing.8);
+        padding-top: theme(spacing.2);
+        font-size: theme(fontSize.xl);
+        line-height: theme(lineHeight.7);
+      }
+
       z-index: 1;
 
-      &:before {
-        transition: opacity 300ms ease-in-out;
-        content: '→';
-        color: black;
-        margin-right: 0.1em;
-        opacity: 0;
-        z-index: -1;
-        /* background: linear-gradient(180deg, transparent, color-mod(theme('colors.body-contrast') a(100%))); */
-
-        /* @media screen(md) {
-               background: linear-gradient(90deg, transparent, color-mod(theme('colors.body-contrast') a(100%)));
-        }
-*/
-      }
-      &:hover, &.selected {
-        @apply font-bold;
+      &:hover,
+      &.selected {
+        font-weight: theme(fontWeight.bold);
 
         &:before {
           opacity: 1;
           transition: opacity 300ms ease-in-out;
         }
       }
+    }
+    a::before {
+      transition: opacity 300ms ease-in-out;
+      content: "→";
+      color: black;
+      margin-right: 0.1em;
+      opacity: 0;
+      z-index: -1;
+      /* background: linear-gradient(180deg, transparent, color-mod(theme('colors.body-contrast') a(100%))); */
+
+      /* @media screen(md) {
+               background: linear-gradient(90deg, transparent, color-mod(theme('colors.body-contrast') a(100%)));
+        }
+*/
     }
   }
 }
@@ -84,8 +113,12 @@ h2, h3, h4 {
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .fade-in {
   animation: fadein 2s;
@@ -95,105 +128,103 @@ h2, h3, h4 {
   filter: grayscale(100%);
 }
 
-
 .site-color-purple {
   .bg-site-color {
-    background: theme('colors.purple.200');
+    background: theme("colors.purple.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.purple.400');
+      color: theme("colors.purple.400");
     }
   }
 }
 .site-color-red {
   .bg-site-color {
-    background: theme('colors.red.200');
+    background: theme("colors.red.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.red.400');
+      color: theme("colors.red.400");
     }
   }
 }
 .site-color-green {
   .bg-site-color {
-    background: theme('colors.green.200');
+    background: theme("colors.green.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.green.400');
+      color: theme("colors.green.400");
     }
   }
 }
 .site-color-blue {
   .bg-site-color {
-    background: theme('colors.blue.200');
+    background: theme("colors.blue.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.blue.400');
+      color: theme("colors.blue.400");
     }
   }
 }
 .site-color-indigo {
   .bg-site-color {
-    background: theme('colors.indigo.200');
+    background: theme("colors.indigo.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.indigo.400');
+      color: theme("colors.indigo.400");
     }
   }
 }
 .site-color-teal {
   .bg-site-color {
-    background: theme('colors.teal.200');
+    background: theme("colors.teal.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.teal.400');
+      color: theme("colors.teal.400");
     }
   }
 }
 .site-color-pink {
   .bg-site-color {
-    background: theme('colors.pink.200');
+    background: theme("colors.pink.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.pink.500');
+      color: theme("colors.pink.500");
     }
   }
 }
 .site-color-gray {
   .bg-site-color {
-    background: theme('colors.gray.200');
+    background: theme("colors.gray.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.gray.400');
+      color: theme("colors.gray.400");
     }
   }
 }
 .site-color-yellow {
   .bg-site-color {
-    background: theme('colors.yellow.200');
+    background: theme("colors.yellow.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.yellow.400');
+      color: theme("colors.yellow.400");
     }
   }
 }
 .site-color-orange {
   .bg-site-color {
-    background: theme('colors.orange.200');
+    background: theme("colors.orange.200");
   }
   .menu li a {
     &:before {
-      color: theme('colors.orange.400');
+      color: theme("colors.orange.400");
     }
   }
 }
-
