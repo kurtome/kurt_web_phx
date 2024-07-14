@@ -71,29 +71,24 @@ h4 {
 
       z-index: 1;
 
-      &:hover,
-      &.selected {
-        font-weight: theme(fontWeight.bold);
-
+      &:hover {
         &:before {
           opacity: 1;
-          transition: opacity 300ms ease-in-out;
+          transition: opacity 150ms ease-in-out;
         }
+      }
+
+      &.selected {
+        font-weight: theme(fontWeight.bold);
       }
     }
     a::before {
-      transition: opacity 300ms ease-in-out;
+      transition: opacity 150ms ease-in-out;
       content: "→";
       color: black;
       margin-right: 0.1em;
       opacity: 0;
       z-index: -1;
-      /* background: linear-gradient(180deg, transparent, color-mod(theme('colors.body-contrast') a(100%))); */
-
-      /* @media screen(md) {
-               background: linear-gradient(90deg, transparent, color-mod(theme('colors.body-contrast') a(100%)));
-        }
-*/
     }
   }
 }
@@ -135,6 +130,116 @@ h4 {
   .menu li a {
     &:before {
       color: theme("colors.purple.400");
+    }
+  }
+}
+.site-color-violet {
+  .bg-site-color {
+    background: theme("colors.violet.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.violet.400");
+    }
+  }
+}
+.site-color-sky {
+  .bg-site-color {
+    background: theme("colors.sky.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.sky.400");
+    }
+  }
+}
+.site-color-gray {
+  .bg-site-color {
+    background: theme("colors.gray.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.gray.400");
+    }
+  }
+}
+.site-color-stone {
+  .bg-site-color {
+    background: theme("colors.stone.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.stone.400");
+    }
+  }
+}
+.site-color-slate {
+  .bg-site-color {
+    background: theme("colors.slate.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.slate.400");
+    }
+  }
+}
+.site-color-amber {
+  .bg-site-color {
+    background: theme("colors.amber.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.amber.400");
+    }
+  }
+}
+.site-color-lime {
+  .bg-site-color {
+    background: theme("colors.lime.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.lime.400");
+    }
+  }
+}
+.site-color-emerald {
+  .bg-site-color {
+    background: theme("colors.emerald.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.emerald.400");
+    }
+  }
+}
+.site-color-cyan {
+  .bg-site-color {
+    background: theme("colors.cyan.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.cyan.400");
+    }
+  }
+}
+.site-color-fuchsia {
+  .bg-site-color {
+    background: theme("colors.fuchsia.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.fuchsia.400");
+    }
+  }
+}
+.site-color-rose {
+  .bg-site-color {
+    background: theme("colors.rose.200");
+  }
+  .menu li a {
+    &:before {
+      color: theme("colors.rose.400");
     }
   }
 }

@@ -14,12 +14,13 @@ defmodule KurtWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", KurtWeb do
-    pipe_through :browser
+  live_session :default do
+    scope "/", KurtWeb do
+      pipe_through :browser
 
-    get "/", PageController, :home
-    get "/color-rand", PageController, :color_rand
-    get "/:slug", PageController, :home
+      live "/", HomeLive.Index
+      live "/:slug", HomeLive.Index
+    end
   end
 
   # Other scopes may use custom stacks.

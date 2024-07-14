@@ -27,7 +27,6 @@ module.exports = {
     extend: {
       colors: {
         body: colors.white,
-        'body-contrast': colors.purple['200']
       }
     },
   },

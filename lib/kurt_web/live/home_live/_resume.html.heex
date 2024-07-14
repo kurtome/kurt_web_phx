@@ -1,0 +1,250 @@
+<div>
+  <p class="">
+    Polyglot server engineer who dabbles in frontend development and game programming.
+    Expert in finding the shortest path to building quality product and technology.
+    I've done lots and lots of backend and frontend web server programming in Java,
+    Scala, Elixir and Python, Ruby/Rails, Javascript/React, TailwindCSS.
+    Additionally I've done worked on "big data" pipelines, Android apps, and Unity games.
+  </p>
+  <h2 class="mt-12 ui-header">Professional Experience</h2>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Google",
+        duration: "2023 - Present",
+        sections: [
+          %{
+            head: "Server Software Engineer",
+            lines: [
+              ~H"""
+              Engineering on Google Drive.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Etsy",
+        duration: "2021 - 2023",
+        sections: [
+          %{
+            head: "Staff Software Engineer",
+            lines: [
+              ~H"""
+              Engineering seller tools on the Shop Opportunities Team.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Realm",
+        duration: "2019 - 2021",
+        sections: [
+          %{
+            head: "Head of Technology",
+            lines: [
+              ~H"""
+              Promoted to running the engineering and tech department while still being hands-on
+              with the Ruby on Rails server and web engineering, plus services in Python and Elixir.
+              """,
+              ~H"""
+              Worked with leadership on company strategy related to our platform.
+              """
+            ]
+          },
+          %{
+            head: "Server Engineering Lead",
+            lines: [
+              ~H"""
+              Implemented many large upgrades to the platform, including: transitioned to Webpack and Tailwind CSS,
+              built a hybrid text reader and audio player, automated syncing our episode transcripts with the audio,
+              and built a new “feed” API in GraphQL for our apps.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+    __MODULE__,
+    "_work_history_item",
+    "html",
+    item: %{
+      name: "Gimlet (and Spotify)",
+      duration: "2018 - 2019",
+      sections: [
+        %{
+          head: "Lead Software Engineer",
+          lines: [
+            ~H"""
+            Built and launched a brand new public website,
+            <a href="https://gimletmedia.com" target="_blank">gimletmedia.com</a>,
+            and internal CMS from the ground up using modern web tools like
+            Phoenix Framework, Stimulus.js and Bulma CSS.
+            """,
+            ~H"""
+            Engineered a data warehouse solution for analyzing our hundreds of
+            millions of listener downloads using BigQuery SQL and Periscope Data
+            to create performance tracking and audience insights dashboards
+            used across the company.
+            """
+          ]
+        }
+      ]
+    }
+  ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Google",
+        duration: "2015 - 2018",
+        sections: [
+          %{
+            head: "Senior Software Engineer, Google Lens",
+            lines: [
+              """
+              Android app development on Google Lens, including working with ML models on device
+              and custom UI prototyping. The Camera app feature we prototyped was eventually launched
+              on the Pixel 3, allowing users to use their camera to do passive object recognition
+              on device.
+              """
+            ]
+          },
+          %{
+            head: "Senior Software Engineer, Google Play Books",
+            lines: [
+              """
+              Server and data pipeline development implenting new feartures like book series and 
+              improved book discovery by surfacing book related news articles and Youtube videos in
+              the mobile app.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Oyster Books",
+        duration: "2014 - 2015",
+        sections: [
+          %{
+            head: "Senior Software Engineer",
+            lines: [
+              """
+              Built a data ingestion pipeline for all incoming book data from major publishers.
+              Maintenance and feature worker on Django servers and Postgres database.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "Yodle Inc.",
+        duration: "2012 - 2014",
+        sections: [
+          %{
+            head: "Lead Software Engineer",
+            lines: [
+              """
+              Promoted to technical lead for a small team doing fullstack feature work in Java, Scala
+              and Angular web development on a microservices architecture.
+              """
+            ]
+          },
+          %{
+            head: "Senior Software Engineer",
+            lines: [
+              """
+              Developed features in a service oriented architecture using Java / Spring web servers
+              and PostgresDB.
+              """
+            ]
+          },
+          %{
+            head: "Software Engineer",
+            lines: [
+              """
+              Worked with on a small team to develop a complete sales productivity webapp customized
+              to Yodle's salesforce and workflow.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <div class="mt-8">
+    <%= Phoenix.Template.render(
+      __MODULE__,
+      "_work_history_item",
+      "html",
+      item: %{
+        name: "MicroEdge LLC​",
+        duration: "2010 - 2012",
+        sections: [
+          %{
+            head: "Junior Software Developer",
+            lines: [
+              """
+              Was part of a large project to convert a large enterprise VB6 app
+              into a modern Windows application using C# and WPF.
+              """
+            ]
+          }
+        ]
+      }
+    ) %>
+  </div>
+  <h2 class="mt-12 ui-header">EDUCATION</h2>
+  <h3 class="mt-8 uppercase">
+    University of Minnesota - Twin Cities, Institute of Technology
+  </h3>
+  <p class="">
+    <span class="opacity-50">Graduated 2010</span><br>
+    Bachelor of Science in Computer Science, Focus on Artificial Intelligence
+  </p>
+  <h3 class="mt-8 uppercase">
+    Hong Kong University of Science and Technology
+  </h3>
+  <p class="opacity-50">
+    Spring 2009 exchange
+  </p>
+</div>
+

@@ -1,0 +1,12 @@
+<%= for project <- @projects  do %>
+  <div class="mt-8">
+    <h3 class="uppercase mb-1">
+      <a href={project.url} target="_blank">
+        <%= project.name %>
+      </a>
+      <span class="opacity-50 ml-2"><%= project.duration %></span>
+    </h3>
+    <p class="mt-1"><%= project.description %></p>
+  </div>
+<% end %>
+
