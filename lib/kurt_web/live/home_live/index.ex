@@ -27,26 +27,41 @@ defmodule KurtWeb.HomeLive.Index do
   embed_templates "_*"
 
   @impl true
-  def mount(params, _session, socket) do
-    socket = socket
-      |> assign(:content_template, content_template(params))
-      |> assign(:slug, params["slug"])
+  def mount(_params, _session, socket) do
+    socket =
+      socket
       |> calc_color()
+
     {:ok, socket, layout: false}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
-    socket = socket
-      |> assign(:content_template, content_template(params))
-      |> assign(:slug, params["slug"])
+    slug = params["slug"]
+
+    socket =
+      socket
+      |> assign(:slug, slug)
+      |> assign(:content_template, content_template(slug))
+      |> set_animate_site_title(slug)
+
     {:noreply, socket}
+  end
+
+  defp set_animate_site_title(socket, slug) do
+    first_page = socket.assigns[:first_page] == nil
+
+    socket
+    |> assign(:animate_site_title, first_page && slug == nil)
+    |> assign(:first_page, first_page)
   end
 
   @impl true
   def handle_event("color_rand", _params, socket) do
-    socket = socket
+    socket =
+      socket
       |> calc_color()
+
     {:noreply, socket}
   end
 
@@ -58,8 +73,8 @@ defmodule KurtWeb.HomeLive.Index do
     end
   end
 
-  defp content_template(params) do
-    case params["slug"] do
+  defp content_template(slug) do
+    case slug do
       "whoami" -> "_whoami"
       "résumé" -> "_resume"
       "projects" -> "_projects"

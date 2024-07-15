@@ -56,8 +56,8 @@
     </div>
     <div class="flex-auto w-2/3 lg:w-2/5 content-container sticky top-0 bg-site-color">
       <div class={
-        if(@socket.host_uri.path == "/",
-          do: "animate__animated animate__flipInX fadeIn delay-1s slower"
+        if(@animate_site_title,
+          do: "animate__animated animate__flipInX animate__fadeIn animate__delay-1s animate__slow"
         )
       }>
         <h1 class="site-title mirror hidden lg:block opacity-25 text-right ml-8">
