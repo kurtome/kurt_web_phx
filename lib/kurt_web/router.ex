@@ -1,8 +1,14 @@
 defmodule KurtWeb.Router do
   use KurtWeb, :router
 
+  def set_env(conn, _opts) do
+    env = Application.get_env(:kurt, :env)
+    assign(conn, :env, env)
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
+    plug :set_env
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {KurtWeb.Layouts, :root}

@@ -55,10 +55,7 @@ defmodule Kurt.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:"animate.css",
-       github: "animate-css/animate.css",
-       tag: "v4.1.1",
-       app: false,
-       compile: false},
+       github: "animate-css/animate.css", tag: "v4.1.1", app: false, compile: false}
     ]
   end
 

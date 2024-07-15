@@ -10,6 +10,8 @@ import Config
 config :kurt,
   generators: [timestamp_type: :utc_datetime]
 
+config :kurt, :env, :dev
+
 # Configures the endpoint
 config :kurt, KurtWeb.Endpoint,
   url: [host: "localhost"],

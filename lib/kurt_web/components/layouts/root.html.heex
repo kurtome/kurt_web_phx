@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="[scrollbar-gutter:stable]">
   <head>
+    <%= if @env == :prod do %>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEXTGXG6NZ">
+      </script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZEXTGXG6NZ');
+      </script>
+    <% end %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title suffix="">
       <%= assigns[:page_title] || "Kurtis Melby" %>
@@ -12,7 +24,7 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class={"bg-white"}>
+  <body class="bg-white">
     <%= @inner_content %>
   </body>
 </html>
