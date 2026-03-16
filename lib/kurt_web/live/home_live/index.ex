@@ -5,12 +5,7 @@ defmodule KurtWeb.HomeLive.Index do
     "pink",
     "red",
     "green",
-    # "lime",
-    # "amber",
-    # "yellow",
     "purple",
-    # "gray",
-    # "stone",
     "slate",
     "orange",
     "teal",
@@ -28,10 +23,9 @@ defmodule KurtWeb.HomeLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    socket =
-      socket
-      |> calc_color()
+    socket = calc_color(socket)
 
+    # Note: Using `layout: false` because we include it manually via `<Layouts.app flash={@flash}>`
     {:ok, socket, layout: false}
   end
 
@@ -58,11 +52,7 @@ defmodule KurtWeb.HomeLive.Index do
 
   @impl true
   def handle_event("color_rand", _params, socket) do
-    socket =
-      socket
-      |> calc_color()
-
-    {:noreply, socket}
+    {:noreply, calc_color(socket)}
   end
 
   def selected_css_class(slug, current) do
@@ -83,8 +73,8 @@ defmodule KurtWeb.HomeLive.Index do
     end
   end
 
-  defp calc_color(conn) do
+  defp calc_color(socket) do
     color = Enum.random(@colors)
-    assign(conn, :color, color)
+    assign(socket, :color, color)
   end
 end

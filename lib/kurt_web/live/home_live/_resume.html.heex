@@ -8,7 +8,7 @@
   </p>
   <h2 class="mt-12 ui-header">Professional Experience</h2>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -17,7 +17,15 @@
         duration: "2023 - Present",
         sections: [
           %{
-            head: "Server Software Engineer",
+            head: "Software Engineer, AI Innovation & Research",
+            lines: [
+              ~H"""
+              Engineering, building, prototyping and research on AI products.
+              """
+            ]
+          },
+          %{
+            head: "Server Software Engineer, Google Drive",
             lines: [
               ~H"""
               Engineering on Google Drive.
@@ -26,10 +34,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -47,10 +55,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -82,10 +90,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -112,10 +120,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -146,10 +154,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -168,10 +176,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -208,10 +216,10 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <div class="mt-8">
-    <%= Phoenix.Template.render(
+    {Phoenix.Template.render(
       __MODULE__,
       "_work_history_item",
       "html",
@@ -230,7 +238,7 @@
           }
         ]
       }
-    ) %>
+    )}
   </div>
   <h2 class="mt-12 ui-header">EDUCATION</h2>
   <h3 class="mt-8 uppercase">

@@ -1,7 +1,5 @@
 import Config
 
-config :kurt, :env, :dev
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -11,11 +9,11 @@ config :kurt, :env, :dev
 config :kurt, KurtWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {127, 0, 0, 1}],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "e7TL3/73/2jPmvzwjchuUX5pdXVr4bkHD8Y5J9P6ssKk6HgfE3XJXLW3RkDEeojf",
+  secret_key_base: "XFKpJoZSzRaDbPReaa5gvG13rV7inYYxndEq9eA7IuRKpXevr4CwRBVONS6ImIoL",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:kurt, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:kurt, ~w(--watch)]}
@@ -44,13 +42,18 @@ config :kurt, KurtWeb.Endpoint,
 # configured to run both http and https servers on
 # different ports.
 
-# Watch static and templates for browser reloading.
+# Reload browser tabs when matching files change.
 config :kurt, KurtWeb.Endpoint,
   live_reload: [
+    web_console_logger: true,
     patterns: [
-      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/kurt_web/(controllers|live|components)/.*(ex|heex)$"
+      # Static assets, except user uploads
+      ~r"priv/static/(?!uploads/).*\.(js|css|png|jpeg|jpg|gif|svg)$"E,
+      # Gettext translations
+      ~r"priv/gettext/.*\.po$"E,
+      # Router, Controllers, LiveViews and LiveComponents
+      ~r"lib/kurt_web/router\.ex$"E,
+      ~r"lib/kurt_web/(controllers|live|components)/.*\.(ex|heex)$"E
     ]
   ]
 
@@ -58,7 +61,7 @@ config :kurt, KurtWeb.Endpoint,
 config :kurt, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :default_formatter, format: "[$level] $message\n"
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
@@ -68,7 +71,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :phoenix_live_view,
-  # Include HEEx debug annotations as HTML comments in rendered markup
+  # Include debug annotations and locations in rendered markup.
+  # Changing this configuration will require mix clean and a full recompile.
   debug_heex_annotations: true,
+  debug_attributes: true,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
