@@ -33,9 +33,19 @@ defmodule KurtWeb.HomeLive.Index do
   def handle_params(params, _url, socket) do
     slug = params["slug"]
 
+    page_title =
+      case slug do
+        "whoami" -> "Who am I? · Kurt Melby"
+        "résumé" -> "Résumé · Kurt Melby"
+        "projects" -> "Projects · Kurt Melby"
+        "etcetera" -> ";al,dkjf.al · Kurt Melby"
+        _ -> "Kurt Melby"
+      end
+
     socket =
       socket
       |> assign(:slug, slug)
+      |> assign(:page_title, page_title)
       |> assign(:content_template, content_template(slug))
       |> set_animate_site_title(slug)
 

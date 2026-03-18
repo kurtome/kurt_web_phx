@@ -81,3 +81,26 @@ if (process.env.NODE_ENV === "development") {
   })
 }
 
+// Konami Code / Retro Terminal Easter Egg
+const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+let konamiPosition = 0;
+
+window.addEventListener("keydown", (e) => {
+  // Toggle with terminal ~ key
+  if (e.key === "~" || e.key === "`") {
+    document.body.classList.toggle("retro-terminal-active");
+    return;
+  }
+
+  // Check for konami code sequence
+  if (e.key === konamiCode[konamiPosition]) {
+    konamiPosition++;
+    if (konamiPosition === konamiCode.length) {
+      document.body.classList.toggle("retro-terminal-active");
+      konamiPosition = 0;
+    }
+  } else {
+    // Reset if it doesn't match
+    konamiPosition = 0;
+  }
+});

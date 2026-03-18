@@ -19,6 +19,15 @@ This project is a complete port and modernization of the original website, built
 * **Stateless Content**: Because the application intentionally omits a database configuration, all text content (job history, project lists) is hardcoded directly into the `.heex` template files.
 * **UI Flourishes**: The site incorporates CSS animations (`animate.min.css`), `Lato` Google Fonts, and SVG Heroicons via a seamless Tailwind plugin.
 
+## Easter Eggs & Interactions
+
+The site includes several hidden interactive features and "easter eggs" built using Phoenix LiveView's Javascript hooks and CSS animations:
+
+1. **Color Randomizer**: Every time you navigate to a new page, the right pane smoothly transitions to a randomized color from the Tailwind palette. Navigation links also have an RGB-split "glitch" effect on hover.
+2. **Physics Gravity Drop**: If you rapidly click the main "Kurtis Melby" header on the left side 5 times, physics kicks in. The letters detach and fall to the bottom of the screen with a bounce.
+3. **Mirror Mode**: Clicking the mirrored "Kurtis Melby" header on the right side triggers a 3D hardware-accelerated rotation (`rotateY(180deg)`) on the entire document body. This physically flips the layout and perfectly mirrors all text backwards.
+4. **Retro CRT Terminal**: Typing the Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`) or pressing the terminal tilde key (`~` or `` ` ``) toggles a global CSS overlay that transforms the entire site into a phosphor-green retro CRT terminal.
+
 ## Local Development
 
 To run this application locally for development:

@@ -88,12 +88,26 @@ h4 a:hover {
   transition: opacity 150ms ease-in-out;
 }
 
+@keyframes glitch {
+  0% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.03em -0.04em 0 rgba(0,255,0,0.75), 0.025em 0.04em 0 rgba(0,0,255,0.75); }
+  15% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.03em -0.04em 0 rgba(0,255,0,0.75), 0.025em 0.04em 0 rgba(0,0,255,0.75); }
+  16% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.03em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
+  49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.03em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
+  50% { text-shadow: 0.05em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
+  99% { text-shadow: 0.05em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
+  100% { text-shadow: -0.025em 0 0 rgba(255,0,0,0.75), -0.025em -0.025em 0 rgba(0,255,0,0.75), -0.025em -0.05em 0 rgba(0,0,255,0.75); }
+}
+
+.menu li a:hover {
+  animation: glitch 500ms infinite;
+}
+
 .menu li a.selected {
   font-weight: 700;
 }
 
 .menu li a::before {
-  transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out, color 0.8s ease-in-out;
   content: "→";
   color: black;
   margin-right: 0.1em;
@@ -128,6 +142,18 @@ h4 a:hover {
 
 .mirror {
   transform: scale(-1, 1);
+  font-family: 'Permanent Marker', cursive;
+  font-weight: normal; /* Removes the bold from the main title */
+}
+
+body {
+  transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-style: preserve-3d;
+  overflow-x: hidden;
+}
+
+body.mirror-mode {
+  transform: rotateY(180deg);
 }
 
 @keyframes fadein {
@@ -140,6 +166,11 @@ h4 a:hover {
 
 .filter-grayscale {
   filter: grayscale(100%);
+}
+
+.bg-site-color {
+  /* Fluid color transition for the background */
+  transition: background-color 0.8s ease-in-out;
 }
 
 .site-color-purple .bg-site-color { background-color: var(--color-purple-200); }
@@ -201,3 +232,25 @@ h4 a:hover {
 
 .site-color-orange .bg-site-color { background-color: var(--color-orange-200); }
 .site-color-orange .menu li a::before { color: var(--color-orange-400); }
+
+/* Retro Terminal Easter Egg */
+body.retro-terminal-active * {
+  font-family: 'Roboto Mono', monospace !important;
+  color: #0f0 !important;
+  background-color: #000 !important;
+  border-color: #0f0 !important;
+}
+
+body.retro-terminal-active::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}

@@ -9,8 +9,7 @@ defmodule Kurt.Application do
   def start(_type, _args) do
     children = [
       KurtWeb.Telemetry,
-      {DNSCluster,
-       query: Application.get_env(:kurt, :dns_cluster_query) || :ignore},
+      {DNSCluster, query: Application.get_env(:kurt, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Kurt.PubSub},
       # Start a worker by calling: Kurt.Worker.start_link(arg)
       # {Kurt.Worker, arg},
