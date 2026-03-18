@@ -35,3 +35,5 @@ kurt_web_phx_fresh-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Elixir LS
+.elixir_ls/
