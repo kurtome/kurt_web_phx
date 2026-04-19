@@ -1,11 +1,15 @@
 <Layouts.app flash={@flash}>
-  <div class={"site-color-#{@color}"}>
-    <div class="mb-6 flex lg:hidden">
+  <div
+    id="color-wrapper"
+    phx-hook=".ColorRoll"
+    data-target-color={@color}
+    class={"site-color-#{@color}"}
+  >
+    <div id="mobile-header" phx-hook=".LightsOutClick" class="mb-6 flex lg:hidden">
       <div class="w-1/3"></div>
       <div class="w-2/3">
         <h1
           id="header-mobile"
-          phx-hook=".PhysicsHeader"
           class="site-title text-3xl text-left select-none"
         >
           <.link patch="/">
@@ -14,12 +18,15 @@
         </h1>
       </div>
     </div>
-    <div class="flex items-start w-full min-h-screen">
-      <div class="sticky top-0 flex-auto h-screen overflow-hidden bg-body w-1/3 lg:w-3/5">
+    <div id="page-flex" class="flex items-start w-full min-h-screen">
+      <div
+        id="left-pane"
+        phx-hook=".LightsOutClick"
+        class="sticky top-0 flex-auto h-screen overflow-hidden w-1/3 lg:w-3/5"
+      >
         <div class="lg:top-0">
           <h1
             id="header-desktop"
-            phx-hook=".PhysicsHeader"
             class="site-title text-right hidden lg:block select-none"
           >
             <.link patch="/">
@@ -54,15 +61,19 @@
           </div>
         </div>
       </div>
-      <div class="flex-auto w-2/3 lg:w-2/5 content-container bg-site-color noise-bg min-h-screen flex flex-col justify-start">
+      <div
+        id="content-pane"
+        phx-hook=".BackgroundColorClick"
+        class="flex-auto w-2/3 lg:w-2/5 content-container bg-site-color noise-bg min-h-screen flex flex-col justify-start"
+      >
         <div class={[
           @animate_site_title &&
             "animate__animated animate__flipInX animate__fadeIn animate__delay-1s animate__slow"
         ]}>
           <h1
             id="mirror-header"
-            phx-hook=".MirrorToggle"
-            class="site-title mirror hidden lg:block opacity-25 text-right ml-8 cursor-pointer"
+            phx-hook=".MirrorFlip"
+            class="site-title mirror hidden lg:block opacity-25 text-right ml-8 select-none"
           >
             <.link patch="/">
               Kurtis Melby
@@ -70,7 +81,7 @@
           </h1>
         </div>
         <%= if assigns[:content_template] do %>
-          <div class="animate__animated animate__fadeIn pb-16">
+          <div class="animate__animated animate__fadeIn pb-16 flex-1">
             <div class="p-4 lg:p-8 max-w-md">
               {Phoenix.Template.render(__MODULE__, @content_template, "html", assigns)}
             </div>
@@ -81,100 +92,174 @@
             </div>
           </div>
         <% else %>
-          <div phx-click="color_rand" class="block w-full h-full pb-16" />
+          <div class="block w-full flex-1 pb-16" />
         <% end %>
       </div>
     </div>
   </div>
 
-  <script :type={Phoenix.LiveView.ColocatedHook} name=".PhysicsHeader">
+  <script :type={Phoenix.LiveView.ColocatedHook} name=".LightsOutClick">
     export default {
       mounted() {
-        this.clickCount = 0;
-        this.lastClick = 0;
-        
+        const CONTENT_SELECTOR = "a, img, button, input, textarea, select, label, p, h1, h2, h3, h4, h5, h6, li, code, pre, svg";
         this.el.addEventListener("click", e => {
-          let now = Date.now();
-          if (now - this.lastClick > 1000) {
-            this.clickCount = 1; // reset if more than 1s between clicks
-          } else {
-            this.clickCount++;
-          }
-          this.lastClick = now;
-
-          if (this.clickCount < 5) {
-            // Provide visual feedback for clicks 1-4
-            this.el.style.transition = "transform 0.1s, color 0.1s";
-            this.el.style.transform = `scale(${1 - (this.clickCount * 0.02)}) rotate(${(Math.random() - 0.5) * 2}deg)`;
-            
-            setTimeout(() => {
-              if (this.clickCount < 5) { // Ensure it doesn't reset if the 5th click just triggered
-                this.el.style.transform = `scale(1) rotate(0deg)`;
-              }
-            }, 100);
-          }
-
-          if (this.clickCount >= 5) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (!this.el.classList.contains("falling")) {
-              this.el.classList.add("falling");
-              this.el.style.pointerEvents = "none";
-              this.el.style.transform = "scale(1) rotate(0deg)"; // reset feedback transform
-              
-              const link = this.el.querySelector("a");
-              if (link) {
-                const text = link.innerText;
-                link.innerHTML = "";
-                for (let i = 0; i < text.length; i++) {
-                  let char = text[i];
-                  let span = document.createElement("span");
-                  span.innerText = char === " " ? "\u00A0" : char;
-                  span.style.display = "inline-block";
-                  link.appendChild(span);
-                  
-                  // Apply falling animation with random slight delay
-                  setTimeout(() => {
-                    span.style.transition = "transform 1.2s cubic-bezier(0.55, 0.085, 0.68, 0.53)";
-                    const rect = span.getBoundingClientRect();
-                    const dropDistance = window.innerHeight - rect.bottom - 20; // Drop to just above the bottom of the screen
-                    const rotate = (Math.random() - 0.5) * 720; // up to 360deg spin
-                    span.style.transform = `translateY(${dropDistance}px) rotate(${rotate}deg)`;
-                    
-                    // Revert back up after ~20 seconds
-                    setTimeout(() => {
-                      span.style.transition = "transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-                      span.style.transform = "translateY(0px) rotate(0deg)";
-                      
-                      // After the revert animation finishes, reset everything
-                      setTimeout(() => {
-                        if (i === text.length - 1) {
-                          this.el.classList.remove("falling");
-                          this.el.style.pointerEvents = "auto";
-                          this.clickCount = 0;
-                          link.innerText = text; // Restore the clean text node instead of spans
-                        }
-                      }, 1500);
-                    }, 20000 + Math.random() * 1000);
-                  }, Math.random() * 300);
-                }
-              }
-            }
-          }
+          if (e.target.closest(CONTENT_SELECTOR)) return;
+          document.body.classList.toggle("lights-out");
         });
       }
     }
   </script>
 
-  <script :type={Phoenix.LiveView.ColocatedHook} name=".MirrorToggle">
+  <script :type={Phoenix.LiveView.ColocatedHook} name=".MirrorFlip">
     export default {
       mounted() {
         this.el.addEventListener("click", e => {
           e.preventDefault();
           e.stopPropagation();
-          document.body.classList.toggle("mirror-mode");
+
+          // Flip the entire desktop layout row: both columns mirror together,
+          // so the sidebar swaps sides, the menu reads backwards, the real title
+          // becomes the mirror, and the ghost title becomes the only readable one.
+          const pageFlex = document.getElementById("page-flex");
+          if (!pageFlex || pageFlex.classList.contains("mirror-flipped")) return;
+
+          pageFlex.classList.add("mirror-flipped");
+          setTimeout(() => pageFlex.classList.remove("mirror-flipped"), 4000);
         });
+      }
+    }
+  </script>
+
+  <script :type={Phoenix.LiveView.ColocatedHook} name=".BackgroundColorClick">
+    export default {
+      mounted() {
+        // Clicking empty background areas of the content pane re-rolls the color.
+        // Ignore clicks on actual content (text, links, images, form controls)
+        // so selecting text or following links doesn't trigger it.
+        const CONTENT_SELECTOR = "a, img, button, input, textarea, select, label, p, h1, h2, h3, h4, h5, h6, li, code, pre, svg";
+
+        this.el.addEventListener("click", e => {
+          if (e.target.closest(CONTENT_SELECTOR)) return;
+          this.pushEvent("color_rand", {});
+        });
+      }
+    }
+  </script>
+
+  <script :type={Phoenix.LiveView.ColocatedHook} name=".ColorRoll">
+    export default {
+      mounted() {
+        this.targetColor = this.el.dataset.targetColor;
+        this.initialTimeout = setTimeout(() => {
+          this.playRoll();
+        }, 1000);
+      },
+      updated() {
+        if (this.el.dataset.targetColor !== this.targetColor) {
+          clearTimeout(this.initialTimeout);
+          this.targetColor = this.el.dataset.targetColor;
+          if (!this.el.classList.contains("color-rolling") && !this.el.classList.contains("color-landing")) {
+            this.playRoll();
+          }
+        }
+      },
+      destroyed() {
+        clearTimeout(this.initialTimeout);
+        if (this.timeouts) this.timeouts.forEach(clearTimeout);
+      },
+      playRoll() {
+        // Respect users who have asked for reduced motion.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const palette = [
+          "pink", "red", "green", "purple", "slate", "orange", "teal",
+          "emerald", "cyan", "sky", "blue", "indigo", "violet", "fuchsia", "rose"
+        ];
+
+        // The server already picked the final color and rendered it as a class.
+        const finalClass = Array.from(this.el.classList).find(c => c.startsWith("site-color-"));
+        if (!finalClass) return;
+        
+        const finalColorName = finalClass.replace("site-color-", "");
+
+        /* Wait, no need for the rolling class anymore since we don't blur */
+        // Disable the native fading transition during the swipe effect
+        this.el.style.setProperty("--site-color-transition", "0ms");
+
+        const intermediates = palette.filter(c => c !== finalColorName);
+
+        const swapTo = (newClass, dur, ease = 'linear') => {
+          const wrapper = this.el;
+          const pane = document.getElementById("content-pane");
+          
+          const current = Array.from(wrapper.classList).find(c => c.startsWith("site-color-"));
+          const prevColorVar = current ? `var(--color-${current.replace('site-color-', '')}-200)` : "transparent";
+          const newColorVar = `var(--color-${newClass.replace('site-color-', '')}-200)`;
+          
+          if (current) wrapper.classList.remove(current);
+          wrapper.classList.add(newClass);
+          
+          if (pane) {
+            pane.style.setProperty('--prev-bg', prevColorVar);
+            pane.style.setProperty('--new-bg', newColorVar);
+            if (dur) {
+              pane.style.setProperty('--swipe-dur', `${dur}ms`);
+              pane.style.setProperty('--swipe-ease', ease);
+            }
+            
+            // restart CSS swipe animation
+            pane.classList.remove('is-swiping');
+            void pane.offsetWidth; // force reflow
+            pane.classList.add('is-swiping');
+          }
+        };
+
+        const steps = [
+          { at: 0,    dur: 600 },
+          { at: 600,  dur: 650 },
+          { at: 1250, dur: 700 },
+          { at: 1950, dur: 800 }
+        ];
+        
+        // Dynamically calculate when the final step finishes so the Landing 
+        // animation executes continuously without unexpected gaps or overlaps.
+        const lastStep = steps[steps.length - 1];
+        const landingAt = lastStep.at + lastStep.dur;
+        
+        if (this.timeouts) this.timeouts.forEach(clearTimeout);
+        this.timeouts = [];
+
+        steps.forEach(({ at, dur }) => {
+          const id = setTimeout(() => {
+            const pick = intermediates[Math.floor(Math.random() * intermediates.length)];
+            swapTo(`site-color-${pick}`, dur);
+          }, at);
+          this.timeouts.push(id);
+        });
+
+        // Landing
+        const id = setTimeout(() => {
+          this.el.style.removeProperty("--site-color-transition");
+          
+          // Smooth 1800ms landing swipe
+          swapTo(finalClass, 1800, 'ease-out');
+
+          const pane = document.getElementById("content-pane");
+          if (pane) {
+            pane.classList.add("color-settled");
+            setTimeout(() => pane.classList.remove("color-settled"), 450);
+            
+            // Cleanup swiping class after landing animation finishes
+            setTimeout(() => {
+              pane.classList.remove('is-swiping');
+              pane.style.removeProperty('--prev-bg');
+              pane.style.removeProperty('--new-bg');
+              pane.style.removeProperty('--swipe-dur');
+              pane.style.removeProperty('--swipe-ease');
+            }, 1850);
+          }
+        }, landingAt);
+        this.timeouts.push(id);
       }
     }
   </script>

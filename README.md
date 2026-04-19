@@ -21,12 +21,12 @@ This project is a complete port and modernization of the original website, built
 
 ## Easter Eggs & Interactions
 
-The site includes several hidden interactive features and "easter eggs" built using Phoenix LiveView's Javascript hooks and CSS animations:
+The site includes a few hidden interactive features and "easter eggs" built using Phoenix LiveView's Javascript hooks and CSS animations:
 
-1. **Color Randomizer**: Every time you navigate to a new page, the right pane smoothly transitions to a randomized color from the Tailwind palette. Navigation links also have an RGB-split "glitch" effect on hover.
-2. **Physics Gravity Drop**: If you rapidly click the main "Kurtis Melby" header on the left side 5 times, physics kicks in. The letters detach and fall to the bottom of the screen with a bounce.
-3. **Mirror Mode**: Clicking the mirrored "Kurtis Melby" header on the right side triggers a 3D hardware-accelerated rotation (`rotateY(180deg)`) on the entire document body. This physically flips the layout and perfectly mirrors all text backwards.
-4. **Retro CRT Terminal**: Typing the Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`) or pressing the terminal tilde key (`~` or `` ` ``) toggles a global CSS overlay that transforms the entire site into a phosphor-green retro CRT terminal.
+1. **Color Randomizer**: On each page load the right pane runs a brief "slot machine" roll through a few random pastels before landing on its chosen color for that visit. Afterwards, clicking an empty area of the colored pane (not on text, links, or images) re-rolls to a new color with a smooth transition. Works on every page. The roll is skipped when the browser reports `prefers-reduced-motion`.
+2. **Physics Gravity Drop**: If you rapidly click the main "Kurtis Melby" header on the left side 5 times, physics kicks in. The letters detach and fall to the bottom of the screen with a bounce, then return to their place after about 20 seconds.
+3. **Mirror Flip**: Clicking the mirrored "Kurtis Melby" ghost title on the right side briefly flips the entire desktop layout horizontally (via `scaleX(-1)`). The sidebar swaps sides, the menu text and real title mirror, and the ghost title becomes the only readable thing on the page. Auto-reverts after a few seconds.
+4. **Page-aware browser title**: The document title updates based on the active route (e.g. `Projects · Kurt Melby`). The `etcetera` page keeps its keyboard-mash title for fun.
 
 ## Local Development
 

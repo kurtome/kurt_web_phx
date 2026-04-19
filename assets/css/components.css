@@ -16,6 +16,7 @@ p a {
   text-decoration: underline;
   transition: opacity 300ms ease-in-out;
 }
+
 p a:hover {
   transition: opacity 300ms ease-in-out;
   opacity: 0.75;
@@ -27,6 +28,7 @@ h4 a {
   text-decoration: underline;
   transition: opacity 300ms ease-in-out;
 }
+
 h2 a:hover,
 h3 a:hover,
 h4 a:hover {
@@ -88,20 +90,6 @@ h4 a:hover {
   transition: opacity 150ms ease-in-out;
 }
 
-@keyframes glitch {
-  0% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.03em -0.04em 0 rgba(0,255,0,0.75), 0.025em 0.04em 0 rgba(0,0,255,0.75); }
-  15% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.03em -0.04em 0 rgba(0,255,0,0.75), 0.025em 0.04em 0 rgba(0,0,255,0.75); }
-  16% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.03em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
-  49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.03em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
-  50% { text-shadow: 0.05em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
-  99% { text-shadow: 0.05em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
-  100% { text-shadow: -0.025em 0 0 rgba(255,0,0,0.75), -0.025em -0.025em 0 rgba(0,255,0,0.75), -0.025em -0.05em 0 rgba(0,0,255,0.75); }
-}
-
-.menu li a:hover {
-  animation: glitch 500ms infinite;
-}
-
 .menu li a.selected {
   font-weight: 700;
 }
@@ -143,23 +131,33 @@ h4 a:hover {
 .mirror {
   transform: scale(-1, 1);
   font-family: 'Permanent Marker', cursive;
-  font-weight: normal; /* Removes the bold from the main title */
+  font-weight: normal;
+  /* Removes the bold from the main title */
 }
 
-body {
-  transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transform-style: preserve-3d;
-  overflow-x: hidden;
+/* Mirror Flip easter egg: clicking the ghost title flips the whole desktop
+   layout row. The sidebar swaps sides, menu/title/content all mirror, and
+   the previously-mirrored ghost title is suddenly the only readable thing.
+   Applied to #page-flex (not .content-container) so it doesn't collide with
+   the bg-site-color transition on the right pane. Auto-reverts via JS. */
+#page-flex {
+  transition: transform 700ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-body.mirror-mode {
-  transform: rotateY(180deg);
+#page-flex.mirror-flipped {
+  transform: scaleX(-1);
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 .fade-in {
   animation: fadein 2s;
 }
@@ -169,88 +167,232 @@ body.mirror-mode {
 }
 
 .bg-site-color {
-  /* Fluid color transition for the background */
-  transition: background-color 0.8s ease-in-out;
+  /* Ensure standard background fading operates on a configurable variable interval
+     so JS can disable it mid-swipe */
+  transition: background-color var(--site-color-transition, 0.8s) ease-in-out;
 }
 
-.site-color-purple .bg-site-color { background-color: var(--color-purple-200); }
-.site-color-purple .menu li a::before { color: var(--color-purple-400); }
+/* Brief inner-glow bloom on landing — the "click" of the reel stopping.
+   Uses an inset box-shadow instead of a transform so there's no layout
+   shift (the old scale-based pulse visibly nudged the left divider). */
+@keyframes colorSettle {
 
-.site-color-violet .bg-site-color { background-color: var(--color-violet-200); }
-.site-color-violet .menu li a::before { color: var(--color-violet-400); }
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+  }
 
-.site-color-sky .bg-site-color { background-color: var(--color-sky-200); }
-.site-color-sky .menu li a::before { color: var(--color-sky-400); }
-
-.site-color-gray .bg-site-color { background-color: var(--color-gray-200); }
-.site-color-gray .menu li a::before { color: var(--color-gray-400); }
-
-.site-color-stone .bg-site-color { background-color: var(--color-stone-200); }
-.site-color-stone .menu li a::before { color: var(--color-stone-400); }
-
-.site-color-slate .bg-site-color { background-color: var(--color-slate-200); }
-.site-color-slate .menu li a::before { color: var(--color-slate-400); }
-
-.site-color-amber .bg-site-color { background-color: var(--color-amber-200); }
-.site-color-amber .menu li a::before { color: var(--color-amber-400); }
-
-.site-color-lime .bg-site-color { background-color: var(--color-lime-200); }
-.site-color-lime .menu li a::before { color: var(--color-lime-400); }
-
-.site-color-emerald .bg-site-color { background-color: var(--color-emerald-200); }
-.site-color-emerald .menu li a::before { color: var(--color-emerald-400); }
-
-.site-color-cyan .bg-site-color { background-color: var(--color-cyan-200); }
-.site-color-cyan .menu li a::before { color: var(--color-cyan-400); }
-
-.site-color-fuchsia .bg-site-color { background-color: var(--color-fuchsia-200); }
-.site-color-fuchsia .menu li a::before { color: var(--color-fuchsia-400); }
-
-.site-color-rose .bg-site-color { background-color: var(--color-rose-200); }
-.site-color-rose .menu li a::before { color: var(--color-rose-400); }
-
-.site-color-red .bg-site-color { background-color: var(--color-red-200); }
-.site-color-red .menu li a::before { color: var(--color-red-400); }
-
-.site-color-green .bg-site-color { background-color: var(--color-green-200); }
-.site-color-green .menu li a::before { color: var(--color-green-400); }
-
-.site-color-blue .bg-site-color { background-color: var(--color-blue-200); }
-.site-color-blue .menu li a::before { color: var(--color-blue-400); }
-
-.site-color-indigo .bg-site-color { background-color: var(--color-indigo-200); }
-.site-color-indigo .menu li a::before { color: var(--color-indigo-400); }
-
-.site-color-teal .bg-site-color { background-color: var(--color-teal-200); }
-.site-color-teal .menu li a::before { color: var(--color-teal-400); }
-
-.site-color-pink .bg-site-color { background-color: var(--color-pink-200); }
-.site-color-pink .menu li a::before { color: var(--color-pink-500); }
-
-.site-color-yellow .bg-site-color { background-color: var(--color-yellow-200); }
-.site-color-yellow .menu li a::before { color: var(--color-yellow-400); }
-
-.site-color-orange .bg-site-color { background-color: var(--color-orange-200); }
-.site-color-orange .menu li a::before { color: var(--color-orange-400); }
-
-/* Retro Terminal Easter Egg */
-body.retro-terminal-active * {
-  font-family: 'Roboto Mono', monospace !important;
-  color: #0f0 !important;
-  background-color: #000 !important;
-  border-color: #0f0 !important;
+  40% {
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.25);
+  }
 }
 
-body.retro-terminal-active::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 9999;
-  background-size: 100% 2px, 3px 100%;
-  pointer-events: none;
+#content-pane.color-settled {
+  animation: colorSettle 450ms ease-out;
+}
+
+/* Lights Out Easter Egg */
+
+/* Define explicit base colors so the untoggle transition has a firm target */
+#left-pane,
+#mobile-header {
+  color: #111111;
+}
+
+#left-pane a,
+#mobile-header a {
+  color: #111111;
+  transition: opacity 300ms ease-in-out;
+}
+
+body.lights-out {
+  background-color: #050505;
+}
+
+body.lights-out #left-pane,
+body.lights-out #mobile-header {
+  color: #f1f1f1;
+}
+
+body.lights-out #left-pane a,
+body.lights-out #mobile-header a {
+  color: #f1f1f1;
+}
+
+/* Color Swipe Animation */
+#content-pane.is-swiping.bg-site-color {
+  /* Provide a smooth bleeding gradient masking the text underneath */
+  background-image: linear-gradient(to right, var(--new-bg) 40%, var(--prev-bg) 60%);
+  background-size: 300% 100%;
+  animation: bgSwipe var(--swipe-dur, 100ms) var(--swipe-ease, linear) forwards;
+}
+
+@keyframes bgSwipe {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.site-color-purple .bg-site-color {
+  background-color: var(--color-purple-200);
+}
+
+.site-color-purple .menu li a::before {
+  color: var(--color-purple-400);
+}
+
+.site-color-violet .bg-site-color {
+  background-color: var(--color-violet-200);
+}
+
+.site-color-violet .menu li a::before {
+  color: var(--color-violet-400);
+}
+
+.site-color-sky .bg-site-color {
+  background-color: var(--color-sky-200);
+}
+
+.site-color-sky .menu li a::before {
+  color: var(--color-sky-400);
+}
+
+.site-color-gray .bg-site-color {
+  background-color: var(--color-gray-200);
+}
+
+.site-color-gray .menu li a::before {
+  color: var(--color-gray-400);
+}
+
+.site-color-stone .bg-site-color {
+  background-color: var(--color-stone-200);
+}
+
+.site-color-stone .menu li a::before {
+  color: var(--color-stone-400);
+}
+
+.site-color-slate .bg-site-color {
+  background-color: var(--color-slate-200);
+}
+
+.site-color-slate .menu li a::before {
+  color: var(--color-slate-400);
+}
+
+.site-color-amber .bg-site-color {
+  background-color: var(--color-amber-200);
+}
+
+.site-color-amber .menu li a::before {
+  color: var(--color-amber-400);
+}
+
+.site-color-lime .bg-site-color {
+  background-color: var(--color-lime-200);
+}
+
+.site-color-lime .menu li a::before {
+  color: var(--color-lime-400);
+}
+
+.site-color-emerald .bg-site-color {
+  background-color: var(--color-emerald-200);
+}
+
+.site-color-emerald .menu li a::before {
+  color: var(--color-emerald-400);
+}
+
+.site-color-cyan .bg-site-color {
+  background-color: var(--color-cyan-200);
+}
+
+.site-color-cyan .menu li a::before {
+  color: var(--color-cyan-400);
+}
+
+.site-color-fuchsia .bg-site-color {
+  background-color: var(--color-fuchsia-200);
+}
+
+.site-color-fuchsia .menu li a::before {
+  color: var(--color-fuchsia-400);
+}
+
+.site-color-rose .bg-site-color {
+  background-color: var(--color-rose-200);
+}
+
+.site-color-rose .menu li a::before {
+  color: var(--color-rose-400);
+}
+
+.site-color-red .bg-site-color {
+  background-color: var(--color-red-200);
+}
+
+.site-color-red .menu li a::before {
+  color: var(--color-red-400);
+}
+
+.site-color-green .bg-site-color {
+  background-color: var(--color-green-200);
+}
+
+.site-color-green .menu li a::before {
+  color: var(--color-green-400);
+}
+
+.site-color-blue .bg-site-color {
+  background-color: var(--color-blue-200);
+}
+
+.site-color-blue .menu li a::before {
+  color: var(--color-blue-400);
+}
+
+.site-color-indigo .bg-site-color {
+  background-color: var(--color-indigo-200);
+}
+
+.site-color-indigo .menu li a::before {
+  color: var(--color-indigo-400);
+}
+
+.site-color-teal .bg-site-color {
+  background-color: var(--color-teal-200);
+}
+
+.site-color-teal .menu li a::before {
+  color: var(--color-teal-400);
+}
+
+.site-color-pink .bg-site-color {
+  background-color: var(--color-pink-200);
+}
+
+.site-color-pink .menu li a::before {
+  color: var(--color-pink-500);
+}
+
+.site-color-yellow .bg-site-color {
+  background-color: var(--color-yellow-200);
+}
+
+.site-color-yellow .menu li a::before {
+  color: var(--color-yellow-400);
+}
+
+.site-color-orange .bg-site-color {
+  background-color: var(--color-orange-200);
+}
+
+.site-color-orange .menu li a::before {
+  color: var(--color-orange-400);
 }
